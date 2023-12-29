@@ -15,6 +15,7 @@ spec:
       containers:
         - name: auth
           image: tamyvivas/ms-ticket-auth
+          # image: us.gcr.io/ms-ticketing-dev-409523/auth # for Cloud Build
           imagePullPolicy: Never
 ---
 apiVersion: v1
