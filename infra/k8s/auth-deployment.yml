@@ -17,6 +17,12 @@ spec:
           image: tamyvivas/ms-ticket-auth
           # image: us.gcr.io/ms-ticketing-dev-409523/auth # for Cloud Build
           imagePullPolicy: Never
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
