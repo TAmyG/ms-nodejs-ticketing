@@ -1,41 +1,7 @@
-import express from 'express';
-import 'express-async-errors';
-import { json } from 'body-parser';
+
 import mongoose from 'mongoose';
-import cookieSession from 'cookie-session';
 
-import { currentUserRouter } from './routes/current-user';
-import { signinRouter } from './routes/signin';
-import { signoutRouter } from './routes/signout';
-import { signupRouter } from './routes/signup';
-import { NotFoundError } from './errors/not-found-error';
-import { errorHandler } from './middlewares/error-handler';
-
-const app = express();
-app.set('trust proxy', true); // This tells express is behind a proxy, in our case ingress-nginx
-app.use(json());
-app.use(
-  cookieSession({
-    signed: false,
-    secure: true,
-  })
-);
-
-app.use(currentUserRouter);
-app.use(signinRouter);
-app.use(signoutRouter);
-app.use(signupRouter);
-
-// if express-async-errors is not installed you'll need this code
-// app.all('*', async (req, res, next)=>{
-//   next( new NotFoundError());
-// });
-
-app.all('*', async (req, res) => {
-  throw new NotFoundError();
-});
-
-app.use(errorHandler);
+import { app } from './app';
 
 const start = async () => {
 
