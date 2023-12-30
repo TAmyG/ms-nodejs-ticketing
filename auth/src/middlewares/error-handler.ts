@@ -7,7 +7,6 @@ export const errorHandler = (
     res: Response,
     next: NextFunction
 ) => {
-    console.log('Always get in here')
     if (err instanceof CustomError) {
         return res.status(err.statusCode).send({ errors: err.serializeErrors() });
     }
