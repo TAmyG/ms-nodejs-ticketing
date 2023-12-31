@@ -1,9 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import buildClient from '../api/build-client';
+import Header from '../components/header';
 
-
-// This is the default Component for Next
-const App = ({ Component, pageProps }) => {
-    return <Component {...pageProps} />;
+const AppComponent = ({ Component, pageProps, currentUser }) => {
+    return (
+        <div>
+            <Header currentUser={currentUser} />
+            <Component {...pageProps} />
+        </div>
+    );
 };
 
-export default App;
+AppComponent.getInitialProps = async appContext => {
+    let pageProps = {};
+    try {
+        const client = buildClient(appContext.ctx);
+        const { data } = await client.get('/api/users/currentuser');
+
+        if (appContext.Component.getInitialProps) {
+            pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+        }
+
+        return {
+            pageProps,
+            ...data
+        };
+    } catch (error) {
+        return {
+            pageProps
+        }
+    }
+
+};
+
+export default AppComponent;
