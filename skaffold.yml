@@ -16,7 +16,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: tamyvivas/ms-ticket-aclient
+    - image: tamyvivas/ms-ticket-client
       context: client
       docker:
         dockerfile: Dockerfile
