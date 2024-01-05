@@ -9,3 +9,8 @@ publish npm package
 
 Use this to update the library in the component who is implementing it
 - npm update @tv-tickets/common
+
+3 ways to connect to a POD
+- via Ingress to a ClusterIP
+- via NodePort
+- via port forwarding: kubectl port-forward [pod name] [ local machine port]:[pod port]
