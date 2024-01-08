@@ -12,7 +12,7 @@ const start = async () => {
   }
 
   try {
-
+    // checkt nats deployment in order to get cluster id
     await natsWrapper.connect('ticketing', 'asdfg', 'http://nats-srv:4222');
     natsWrapper.client.on('close', () => {
       console.log('NATS connection closed!');
