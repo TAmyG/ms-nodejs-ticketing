@@ -1,5 +1,8 @@
 import { OrderStatus } from '@tv-tickets/common';
 import mongoose from 'mongoose';
+import { TicketDoc } from './ticket';
+export { OrderStatus };
+
 
 interface OrderAttrs {
   userId: string;
