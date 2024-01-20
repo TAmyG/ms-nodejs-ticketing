@@ -10,18 +10,16 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent>{
 
 
     async onMessage(data: TicketUpdatedEvent['data'], msg: Message) {
-        const ticket = await Ticket.findOne({
-            _id: data.id,
-            version: data.version - 1,
-        });
+        const ticket = await Ticket.findByEvent(data);
 
         if (!ticket) {
             throw new Error('Ticket not found');
         }
+        // add version to remove mongoose-update-if-current
+        const { title, price, version } = data;
 
-        const { title, price } = data;
-
-        ticket.set({ title, price });
+        // add version to remove mongoose-update-if-current
+        ticket.set({ title, price, version });
 
         await ticket.save();
         console.log('Ticket Updated: ', data.id);
