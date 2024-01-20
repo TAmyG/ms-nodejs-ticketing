@@ -65,26 +65,26 @@ router.post(
   }
 );
 
-router.post('/api/orders/ticketcreation',
-  requireAuth,
-  [
-    body('title').not().isEmpty().withMessage('Title is required'),
-    body('price')
-      .isFloat({ gt: 0 })
-      .withMessage('Price must be greater than 0'),
-  ],
-  validateRequest,
-  async (req: Request, res: Response) => {
-    const { title, price } = req.body;
+// router.post('/api/orders/ticketcreation',
+//   requireAuth,
+//   [
+//     body('title').not().isEmpty().withMessage('Title is required'),
+//     body('price')
+//       .isFloat({ gt: 0 })
+//       .withMessage('Price must be greater than 0'),
+//   ],
+//   validateRequest,
+//   async (req: Request, res: Response) => {
+//     const { title, price } = req.body;
 
-    const ticket = Ticket.build({
-      title,
-      price,
-    });
+//     const ticket = Ticket.build({
+//       title,
+//       price,
+//     });
 
-    await ticket.save();
+//     await ticket.save();
 
-    res.status(201).send(ticket);
-  });
+//     res.status(201).send(ticket);
+//   });
 
 export { router as newOrderRouter };
