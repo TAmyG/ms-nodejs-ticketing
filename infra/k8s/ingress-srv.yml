@@ -10,6 +10,13 @@ spec:
     - host: ticketing.dev # Should modify /etc/hosts and add this domain if k8s is locally
       http:
         paths:
+          - path: /api/payments/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: payments-srv
+                port:
+                  number: 3000
           - path: /api/users/?(.*)
             pathType: ImplementationSpecific
             backend:

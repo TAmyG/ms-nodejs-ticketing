@@ -14,3 +14,7 @@ Use this to update the library in the component who is implementing it
 - via Ingress to a ClusterIP
 - via NodePort
 - via port forwarding: kubectl port-forward [pod name] [ local machine port]:[pod port]
+
+
+- kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=<your value>
+- k get secrets
